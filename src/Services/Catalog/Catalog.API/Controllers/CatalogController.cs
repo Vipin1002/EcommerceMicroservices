@@ -47,8 +47,13 @@ namespace Catalog.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProductByCategory(string category)
         {
-            var products = await _repository.GetProductByCategory(category);
-            return Ok(products);
+            var product = await _repository.GetProductByCategory(category);
+            if (product == null)
+            {
+                _logger.LogError($"product with category: {category}, not found");
+                return NotFound();
+            }
+            return Ok(product);
         }
 
         [HttpPost]
