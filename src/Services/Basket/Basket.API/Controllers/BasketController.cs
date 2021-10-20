@@ -17,6 +17,11 @@ namespace Basket.API.Controllers
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
+        /// <summary>
+        /// GetBasket - Method used to return the basket details by username
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         [HttpGet("{userName}", Name ="GetBasket")]
         public async Task<IActionResult> GetBasket(string userName)
         {
@@ -25,12 +30,22 @@ namespace Basket.API.Controllers
             return Ok(basket ?? new ShoppingCart(userName));
         }
 
+        /// <summary>
+        /// UpdateBasket - Method used to create/update the basket details by username
+        /// </summary>
+        /// <param name="basket"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> UpdateBasket([FromBody] ShoppingCart basket)
         {
             return Ok(await _repository.UpdateBasket(basket));
         }
 
+        /// <summary>
+        /// DeleteBasket - Method used to delete the basket details by username
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         [HttpDelete]
         public async Task<IActionResult> DeleteBasket(string userName)
         {

@@ -7,6 +7,10 @@ namespace Catalog.API.Data
 {
     public class CatalogContextSeed
     {
+        /// <summary>
+        /// SeedData - method used to check for product exist in Mongo db collection
+        /// </summary>
+        /// <param name="productCollection"></param>
         public static void SeedData(IMongoCollection<Product> productCollection)
         {
             bool existProduct = productCollection.Find(p => true).Any();
@@ -16,6 +20,10 @@ namespace Catalog.API.Data
             }
         }
 
+        /// <summary>
+        /// GetPreConfiguredProducts - Method used to get the list of default product 
+        /// </summary>
+        /// <returns></returns>
         private static IEnumerable<Product> GetPreConfiguredProducts()
         {
             return new List<Product>()

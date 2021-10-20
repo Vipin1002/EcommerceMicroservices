@@ -21,6 +21,10 @@ namespace Catalog.API.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        /// <summary>
+        /// GetProducts - Method used to return the list of Products
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
@@ -28,6 +32,11 @@ namespace Catalog.API.Controllers
             return Ok(products);
         }
 
+        /// <summary>
+        /// GetProduct - Method used to return the product by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:length(24)}", Name ="GetProduct")]
         public async Task<IActionResult> GetProductById(string id)
         {
@@ -41,6 +50,11 @@ namespace Catalog.API.Controllers
             return Ok(product);
         }
 
+        /// <summary>
+        /// GetProductByCategory - Method used to return the product by category name
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         [Route("[action]/{category}", Name = "GetProductByCategory")]
         [HttpGet]
         public async Task<IActionResult> GetProductByCategory(string category)
@@ -54,6 +68,11 @@ namespace Catalog.API.Controllers
             return Ok(product);
         }
 
+        /// <summary>
+        /// CreateProduct - Method used to create the new product
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> CreateProduct([FromBody] Product product)
@@ -63,12 +82,22 @@ namespace Catalog.API.Controllers
             return CreatedAtRoute("GetProduct", new { id = product.Id }, product);
         }
 
+        /// <summary>
+        /// UpdateProduct - Method used to update the product
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<IActionResult> UpdateProduct([FromBody] Product product)
         {
             return Ok(await _repository.UpdateProduct(product));
         }
 
+        /// <summary>
+        /// DeleteProduct - Method used to delete the product
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
         public async Task<IActionResult> DeleteProductById(string id)
         {

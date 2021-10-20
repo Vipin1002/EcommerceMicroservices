@@ -31,6 +31,7 @@ namespace Catalog.API.Repositories
                 .Find(p => p.Id == id) //Mongo CLI command *find
                 .FirstOrDefaultAsync();
         }
+
         public async Task<IEnumerable<Product>> GetProductByName(string name)
         {
             FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.Name, name);
