@@ -29,6 +29,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> GetProducts()
         {
             var products = await _repository.GetProducts();
+            _logger.LogInformation($"success");
             return Ok(products);
         }
 
